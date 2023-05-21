@@ -1,0 +1,44 @@
+.header {
+    width: 100%;
+    box-shadow:  $box-shadow;
+    padding: 6px 0;
+    margin-bottom: 24px;
+    background-color: $main-bg;
+
+    &__bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    &__logo img {
+        height: 50px;
+    }
+
+    &__menu {
+        &__list {
+            display: flex;
+        }
+
+        &__item {
+            margin: 8px 12px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+    }
+}
+
+.footer {
+    width: 100%;
+    margin-top: 24px;
+    background-color: $main-bg !important;
+    padding: 36px;
+    box-shadow:  $box-shadow;
+
+    &_copyrights {
+        text-align: center;
+        font-weight: 600;
+        font-size: 20px;
+    }
+}

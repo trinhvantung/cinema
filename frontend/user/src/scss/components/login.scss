@@ -1,0 +1,76 @@
+.login {
+    // margin-top: 8px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    &_content {
+        width: 400px;
+        margin: auto;
+        padding: 50px 0;
+    }
+
+    &_tab_list {
+        @include flex(center, space-between);
+        margin-bottom: 24px;
+    }
+
+    &_tab_button {
+        width: 45%;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+        height: 30px;
+
+        &::after {
+            transition: all 0.3s ease;
+            width: 0;
+            position: absolute;
+            content: "";
+            display: block;
+            height: 3px;
+            top: 100%;
+        }
+
+        &:hover {
+            color: $main-color;
+
+            &::after {
+                width: 100%;
+                background-color: $main-color;
+                top: 100%;
+            }
+        }
+
+        &.active {
+            color: $main-color;
+
+            &::after {
+                width: 100%;
+                background-color: $main-color;
+                top: 100%;
+            }
+        }
+    }
+
+    &_button {
+        @include flex(center, center);
+    }
+}
+
+.forgot_password_button {
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+        color: $main-color;
+    }
+}
+
+.forgot_password_title {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0 0 8px 0;
+}

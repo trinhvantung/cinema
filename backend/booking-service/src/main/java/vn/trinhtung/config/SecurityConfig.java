@@ -1,0 +1,78 @@
+package vn.trinhtung.config;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.web.SecurityFilterChain;
+
+@EnableWebSecurity
+@Configuration
+public class SecurityConfig {
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Order(SecurityProperties.BASIC_AUTH_ORDER)
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.csrf().disable();
+		http.authorizeHttpRequests().anyRequest().permitAll();
+
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthenticationConverter());
+
+		return http.build();
+	}
+
+	@Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig)
+			throws Exception {
+		return authConfig.getAuthenticationManager();
+	}
+
+	JwtAuthenticationConverter jwtAuthenticationConverter() {
+		final JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+		jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new AuthorityConverter());
+
+		return jwtAuthenticationConverter;
+	}
+
+	public class AuthorityConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
+		@Override
+		public Collection<GrantedAuthority> convert(final Jwt jwt) {
+			List<String> authorityStrings = jwt.getClaimAsStringList("authorities");
+			if (Objects.isNull(authorityStrings)) {
+				authorityStrings = Collections.emptyList();
+			}
+			List<SimpleGrantedAuthority> authorities = authorityStrings.stream()
+					.map(s -> new SimpleGrantedAuthority(s))
+					.collect(Collectors.toCollection(ArrayList::new));
+
+
+			List<String> scopes = jwt.getClaimAsStringList("scope");
+			if (Objects.nonNull(scopes)) {
+				scopes.forEach(
+						scope -> authorities.add(new SimpleGrantedAuthority("SCOPE_" + scope)));
+			}
+			return new ArrayList<>(authorities);
+		}
+	}
+
+}

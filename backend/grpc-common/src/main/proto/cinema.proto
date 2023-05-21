@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package vn.trinhtung.grpc;
+
+option java_package = "vn.trinhtung.grpc";
+option java_multiple_files = true;
+
+message GetCinemasByIdsRequest {
+  repeated int32 ids = 1;
+}
+
+message GetCinemasByIdsResponse {
+  repeated CinemaResponse cinemas = 1;
+}
+
+
+message CinemaResponse {
+  int32 id = 1;
+  string name = 2;
+  string address = 3;
+}
+
+service CinemaService {
+  rpc getCinemasByIds(GetCinemasByIdsRequest) returns (GetCinemasByIdsResponse);
+}

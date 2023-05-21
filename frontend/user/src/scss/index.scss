@@ -1,0 +1,11 @@
+@import "./variables";
+@import "./mixins";
+@import './base';
+
+@import './components/container.scss';
+@import './components/header.scss';
+@import './components/show.scss';
+@import './components/movie.scss';
+@import './components/show-detail.scss';
+@import './components/login.scss';
+@import './components/order.scss';

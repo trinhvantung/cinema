@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package vn.trinhtung.grpc;
+
+option java_package = "vn.trinhtung.grpc";
+option java_multiple_files = true;
+
+import "movie.proto";
+import "google/protobuf/timestamp.proto";
+
+
+message ShowPriceResponse {
+  int32 show_id = 1;
+  int32 seat_type_id = 2;
+  string price = 3;
+}
+
+
+message ShowResponse {
+  int32 id = 1;
+  google.protobuf.Timestamp start = 2;
+  google.protobuf.Timestamp end = 3;
+  int32 movie_id = 4;
+  int32 hall_id = 5;
+  int32 cinema_id = 6;
+  repeated ShowPriceResponse show_prices = 7;
+  MovieResponse movie = 8;
+}
+
+message GetShowByIdRequest {
+  int32 id = 1;
+}
+
+message GetShowByIdResponse {
+  ShowResponse show = 1;
+}
+
+message GetShowsByIdsRequest {
+  repeated int32 ids = 1;
+}
+
+message GetShowsByIdsResponse {
+  repeated ShowResponse shows = 1;
+}
+
+
+service ShowService {
+  rpc getShowById(GetShowByIdRequest) returns (GetShowByIdResponse);
+
+  rpc getShowsByIds(GetShowsByIdsRequest) returns (GetShowsByIdsResponse);
+}
