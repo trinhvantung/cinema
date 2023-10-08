@@ -1,4 +1,4 @@
-# Website quản lý rạp chiếu và đặt vé xem phim online.
+# Website quản lý rạp chiếu phim và đặt vé xem phim online.
 
 * ## Chức năng:
   ### User:
