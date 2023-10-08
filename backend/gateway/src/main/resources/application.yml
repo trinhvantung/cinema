@@ -1,0 +1,55 @@
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+server:
+  port: 9090
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+      httpclient:
+        connect-timeout: 90000
+        response-timeout: 90s
+      routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth-service/**
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/user-service/**
+        - id: cinema-service
+          uri: lb://cinema-service
+          predicates:
+            - Path=/api/cinema-service/**
+        - id: movie-service
+          uri: lb://movie-service
+          predicates:
+            - Path=/api/movie-service/**
+        - id: show-service
+          uri: lb://show-service
+          predicates:
+            - Path=/api/show-service/**
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/api/payment-service/**
+        - id: booking-service
+          uri: lb://booking-service
+          predicates:
+            - Path=/api/booking-service/**
+        - id: search-service
+          uri: lb://search-service
+          predicates:
+            - Path=/api/search-service/**
+        - id: review-service
+          uri: lb://review-service
+          predicates:
+            - Path=/api/review-service/**

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package vn.trinhtung.grpc;
+
+option java_package = "vn.trinhtung.grpc";
+option java_multiple_files = true;
+
+
+
+message UserResponse {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+}
+
+
+message GetUsersByIdsRequest {
+  repeated string ids = 1;
+}
+
+message GetUsersByIdsResponse {
+  repeated UserResponse users = 1;
+}
+
+
+service UserService {
+  rpc getUsersByIds(GetUsersByIdsRequest) returns (GetUsersByIdsResponse);
+}

@@ -1,0 +1,18 @@
+.account {
+  &_content {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    padding: 16px;
+  }
+
+  &_page_title {
+    text-align: left;
+    border-bottom: $border;
+    padding: 4px 0 20px 0;
+    margin-bottom: 16px;
+    color: $main-color;
+    font-size: 20px;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package vn.trinhtung.grpc;
+
+option java_package = "vn.trinhtung.grpc";
+option java_multiple_files = true;
+
+message GetVnPayPaymentUrlRequest {
+  string amount = 1;
+  int32 booking_id = 2;
+  string user_id = 3;
+}
+
+message GetVnPayPaymentUrlResponse {
+  string url = 1;
+}
+
+service PaymentService {
+  rpc getVnPayPaymentUrl(GetVnPayPaymentUrlRequest) returns (GetVnPayPaymentUrlResponse);
+}

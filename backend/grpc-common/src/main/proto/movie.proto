@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package vn.trinhtung.grpc;
+
+option java_package = "vn.trinhtung.grpc";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+
+message CategoryResponse {
+  int32 id = 1;
+  string name = 2;
+  int32 display_order = 3;
+}
+
+message MovieResponse {
+  int32 id = 1;
+  string name = 2;
+  int32 duration = 3;
+  string description = 4;
+  string thumbnail = 5;
+  google.protobuf.Timestamp release_date = 6;
+  repeated CategoryResponse category = 7;
+}
+
+message GetMovieByIdRequest {
+  int32 id = 1;
+}
+
+message GetMovieByIdResponse {
+  MovieResponse movie = 1;
+}
+
+message GetMoviesByIdsRequest {
+  repeated int32 ids = 1;
+}
+
+message GetMoviesByIdsResponse {
+  repeated MovieResponse movies = 1;
+}
+
+service MovieService {
+  rpc getMovieById(GetMovieByIdRequest) returns (GetMovieByIdResponse);
+
+  rpc getMoviesByIds(GetMoviesByIdsRequest) returns (GetMoviesByIdsResponse);
+}
+

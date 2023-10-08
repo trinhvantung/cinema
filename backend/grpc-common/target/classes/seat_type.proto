@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package vn.trinhtung.grpc;
+
+option java_package = "vn.trinhtung.grpc";
+option java_multiple_files = true;
+
+message SeatTypeResponse {
+  int32 id = 1;
+  string name = 2;
+  string color = 3;
+}
+
+message GetSeaTypesByHallRequest {
+  int32 hall_id = 1;
+}
+
+message GetSeaTypesByHallResponse {
+  repeated SeatTypeResponse seat_types = 1;
+}
+
+service SeatTypeService {
+  rpc getSeatTypesByHall(GetSeaTypesByHallRequest) returns (GetSeaTypesByHallResponse);
+}

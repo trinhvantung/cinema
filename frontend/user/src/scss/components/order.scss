@@ -1,0 +1,109 @@
+.order_item {
+    display: flex;
+    padding: 12px;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, .05);
+    border-radius: 6px;
+    align-items: center;
+    background-color: $main-bg;
+
+    & ~ & {
+        margin-top: 12px;
+    }
+
+    .image {
+        margin-right: 12px;
+        padding: 6px;
+
+        div {
+            width: 100px;
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 6px;
+        }
+    }
+
+    .info {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+
+        & > div:first-child {
+            // margin-right: auto;
+            align-items: flex-start;
+            padding-right: 12px;
+            flex: 1;
+
+            & > .name {
+                font-size: 18px;
+                font-weight: 600;
+                margin-bottom: 12px;
+            }
+
+            & > .cinema, & > .hall {
+                display: flex;
+                font-size: 16px;
+                margin-top: 6px;
+
+                p:first-child {
+                    margin-right: 6px;
+                    font-weight: 500;
+                }
+                p:last-child {
+                    color: $txt-color-second;
+                }
+            }
+
+            & > .seat {
+                font-weight: 500;
+                font-size: 16px;
+            }
+
+            & > ul {
+                li {
+                    margin-left: 16px;
+                    display: flex;
+                    font-weight: 500;
+
+                    div:last-child {
+                        color: $main-color;
+                    }
+
+                    div {
+                        margin: 0 6px;
+                    }
+                }
+            }
+            & > .status {
+                display: flex;
+                font-size: 18px;
+                margin-top: 12px;
+                align-items: center;
+
+                & > p:first-child {
+                    margin-right: 6px;
+                    font-weight: 500;
+                }
+                & > p:nth-child(2) {
+                    color: $success-color;
+                    font-weight: 600;
+                    margin-right: 12px;
+                }
+            }
+        }
+
+        & > div:last-child {
+            display: flex;
+            align-items: end;
+            font-size: 24px;
+            color: $main-color;
+            font-weight: 600;
+            margin-right: 6px;
+            flex-direction: column;
+            
+            & > div:first-child {
+                flex: 1;
+            }
+        }
+    }
+}
