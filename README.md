@@ -94,8 +94,8 @@
   - ### Đăng nhập, đăng ký, quên mật khẩu
   ![Image](image/44.png)
   :------------------------:
-  ![Image](image/46.png)
   ![Image](image/45.png)
+  ![Image](image/46.png)
     
   <br/><br/>
   
